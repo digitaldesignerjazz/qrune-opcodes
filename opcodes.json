@@ -1,0 +1,125 @@
+{
+  "protocol": "QRUNE",
+  "version": "0.1.0-alpha",
+  "last_updated": "2026-06-19",
+  "description": "Machine-readable registry of QRUNE opcodes for use in VMs, assemblers, explorers, fuzzers and AI agent tooling. Part of NovaNet / QNET ecosystem.",
+  "opcodes": [
+    {
+      "hex": "0x00",
+      "decimal": 0,
+      "name": "OP_0",
+      "category": "stack",
+      "gas_cost": 0,
+      "description": "Push empty byte vector (false)",
+      "stack_effect": " -> <empty>"
+    },
+    {
+      "hex": "0x76",
+      "decimal": 118,
+      "name": "OP_DUP",
+      "category": "stack",
+      "gas_cost": 2,
+      "description": "Duplicate top stack item",
+      "stack_effect": "x -> x x"
+    },
+    {
+      "hex": "0x93",
+      "decimal": 147,
+      "name": "OP_ADD",
+      "category": "arithmetic",
+      "gas_cost": 3,
+      "description": "Add top two items (checked arithmetic)",
+      "stack_effect": "a b -> (a + b)"
+    },
+    {
+      "hex": "0xA0",
+      "decimal": 160,
+      "name": "OP_RUNE_ETCH",
+      "category": "rune",
+      "gas_cost": 1200,
+      "description": "Etch new rune: metadata, premine, max_supply, decimals, symbol -> rune_id. Creates global unique rune with Wizard Q narrative metadata.",
+      "stack_effect": "metadata premine max_supply decimals symbol -> rune_id"
+    },
+    {
+      "hex": "0xA1",
+      "decimal": 161,
+      "name": "OP_RUNE_MINT",
+      "category": "rune",
+      "gas_cost": 350,
+      "description": "Mint amount of rune_id (respects supply rules and authorization)",
+      "stack_effect": "rune_id amount -> result"
+    },
+    {
+      "hex": "0xA2",
+      "decimal": 162,
+      "name": "OP_RUNE_TRANSFER",
+      "category": "rune",
+      "gas_cost": 180,
+      "description": "Transfer rune balance to outputs. Supports conditional logic via composition with control flow.",
+      "stack_effect": "rune_id amount destination... -> "
+    },
+    {
+      "hex": "0xA3",
+      "decimal": 163,
+      "name": "OP_RUNE_BURN",
+      "category": "rune",
+      "gas_cost": 220,
+      "description": "Permanently burn rune units (deflationary or ritual mechanics)",
+      "stack_effect": "rune_id amount -> "
+    },
+    {
+      "hex": "0xA4",
+      "decimal": 164,
+      "name": "OP_RUNE_BALANCE",
+      "category": "rune",
+      "gas_cost": 80,
+      "description": "Push current rune balance for context owner",
+      "stack_effect": "rune_id -> balance"
+    },
+    {
+      "hex": "0xC0",
+      "decimal": 192,
+      "name": "OP_RUNE_METADATA_SET",
+      "category": "metadata",
+      "gas_cost": 450,
+      "description": "Update or append Wizard Q narrative metadata / attributes to rune (authorized only)",
+      "stack_effect": "rune_id metadata -> "
+    },
+    {
+      "hex": "0xC1",
+      "decimal": 193,
+      "name": "OP_RUNE_METADATA_GET",
+      "category": "metadata",
+      "gas_cost": 60,
+      "description": "Retrieve and push metadata for rune_id",
+      "stack_effect": "rune_id -> metadata"
+    },
+    {
+      "hex": "0xE0",
+      "decimal": 224,
+      "name": "OP_MESH_ID_VERIFY",
+      "category": "mesh",
+      "gas_cost": 150,
+      "description": "Verify top item matches current tx mesh identity / NovaNet pubkey",
+      "stack_effect": "pubkey_or_addr -> verified_bool"
+    },
+    {
+      "hex": "0xF0",
+      "decimal": 240,
+      "name": "OP_AI_SWARM_CALLBACK",
+      "category": "extension",
+      "gas_cost": 800,
+      "description": "(Planned) Invoke AI agent swarm for decision/lore generation. Requires swarm consensus or ZK result.",
+      "stack_effect": "callback_data -> result"
+    }
+  ],
+  "categories": {
+    "stack": "Stack manipulation and data handling",
+    "arithmetic": "Mathematical and comparison operations",
+    "rune": "Core rune protocol state-changing operations",
+    "metadata": "Wizard Q narrative and attribute handling",
+    "mesh": "QNET / NovaNet / xMesh cross-layer integration",
+    "extension": "Future AI, ZK and custom extensions"
+  },
+  "notes": "This registry is the authoritative source. New opcodes must be added here with unique codes in the appropriate range before implementation. Gas costs are initial estimates and subject to calibration against real mesh node benchmarks."
+}
